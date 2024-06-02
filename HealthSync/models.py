@@ -37,8 +37,8 @@ class Osoba(models.Model):
         ('permanentka', 'Permanentka'),
         ('clen', 'Člen'),
     ]
-    status = models.CharField(max_length=10, choices=STATUS, default='zakaznik', verbose_name='Typ účtu')
-    predplatne = models.CharField(max_length=10, choices=PREDPLATNE, default='ucet', verbose_name='Typ předplatného')
+    status = models.CharField(max_length=15, choices=STATUS, default='zakaznik', verbose_name='Typ účtu')
+    predplatne = models.CharField(max_length=15, choices=PREDPLATNE, default='ucet', verbose_name='Typ předplatného')
     jmeno = models.CharField(max_length=100, verbose_name='Jméno', help_text='')
     prijmeni = models.CharField(max_length=100, verbose_name='Přijmení', help_text='Zadejte přijmení uživatele')
     telefon = models.CharField(max_length=16, verbose_name='Telefon', validators=[TELEFON_REGEX],
@@ -66,7 +66,7 @@ class Lekce(models.Model):
     nazev = models.CharField(max_length=100, verbose_name='Název lekce', help_text='Zadejte název lekce')
     mistnost = models.ForeignKey(Mistnost, on_delete=models.CASCADE, verbose_name='Místnosti',
                                  error_messages={'blank': 'Místnost musí být zvolena'})
-    cvicitel = models.ForeignKey(Person, on_delete=models.CASCADE, verbose_name='Cvičitel',
+    cvicitel = models.ForeignKey(Osoba, on_delete=models.CASCADE, verbose_name='Cvičitel',
                                  error_messages={'blank': 'Cvičitel musí být zvolen'})
     start = models.DateTimeField()
     konec = models.DateTimeField()
@@ -81,13 +81,12 @@ class Lekce(models.Model):
 
 
 class Rezervace(models.Model):
-    zakaznik = models.ForeignKey(Person, on_delete=models.CASCADE, verbose_name='Jméno zákazníka')
+    zakaznik = models.ForeignKey(Osoba, on_delete=models.CASCADE, verbose_name='Jméno zákazníka')
     lekce = models.ForeignKey(Lekce, on_delete=models.CASCADE, verbose_name='Název lekce')
-    registroval = models.ForeignKey(Person, on_delete=models.CASCADE)     # udělat aktualního uživatele
     cas = models.DateTimeField(default=timezone.now)
 
     class Meta:
-        ordering = ['zákaznik']
+        ordering = ['zakaznik']
         verbose_name = 'Rezervace'
         verbose_name_plural = 'Rezervace'
 
