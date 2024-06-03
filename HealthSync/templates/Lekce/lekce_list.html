@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h2 class="text-primary text-center text-uppercase m-3">Seznam lekcí</h2>
+    <div>
+        <table class="table table-bordered table-responsive-lg">
+            <thead class="bg-dark text-light">
+                <tr>
+                    <th>Název lekce</th>
+                    <th>Místnost</th>
+                    <th>Začátek</th>
+                    <th>Konec</th>
+                    <th>Cvičitel</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for lekce in lekce_list %}
+                <tr>
+                    <td>{{ lekce.nazev }}</td>
+                    <td>{{lekce.mistnost}}</td>
+                    <td>{{lekce.start}}</td>
+                    <td>{{lekce.konec}}</td>
+                    <td>{{lekce.cvicitel}}</td>
+                    <td><a href="{% url 'detail_lekce' lekce.id %}" class="btn btn-success">Detail</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+
+        </table>
+    </div>
+{% endblock %}

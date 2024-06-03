@@ -83,7 +83,6 @@ class Lekce(models.Model):
 class Rezervace(models.Model):
     zakaznik = models.ForeignKey(Osoba, on_delete=models.CASCADE, verbose_name='Jméno zákazníka')
     lekce = models.ForeignKey(Lekce, on_delete=models.CASCADE, verbose_name='Název lekce')
-    cas = models.DateTimeField(default=timezone.now)
 
     class Meta:
         ordering = ['zakaznik']

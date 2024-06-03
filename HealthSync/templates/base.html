@@ -5,40 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Moderní Web</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css" rel="stylesheet">
+
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">Logo</a>
+        <a class="navbar-brand" href="/">HealthSync</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Domů</a>
+                <li class="nav-item">
+                    <a class="nav-link" href="/rezervace/seznam">Seznam lekcí</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">O nás</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Služby</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Kontakt</a>
+                    <a class="nav-link" href="/rezervace/lide">Seznam osob</a>
                 </li>
             </ul>
         </div>
     </nav>
 
-    <header class="jumbotron jumbotron-fluid text-white text-center" style="background-image: url('https://via.placeholder.com/1500x500'); background-size: cover; background-position: center;">
-        <div class="container">
-            <h1 class="display-4">Vítejte na našem moderním webu</h1>
-            <p class="lead">Nejlepší místo pro vaše projekty</p>
-        </div>
-    </header>
-
+    <div class="container mt-4">
+        {% block content %}
+        {% endblock %}
+    </div>
     <footer class="bg-dark text-white text-center py-3">
-        <p>&copy; 2024 Všechna práva vyhrazena</p>
+        <p>&copy; 2024 Ondřej Němčík</p>
     </footer>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>

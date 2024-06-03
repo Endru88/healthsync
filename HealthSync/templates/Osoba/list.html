@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h2 class="text-primary text-center text-uppercase m-3">Seznam klientů</h2>
+    <div>
+        <table class="table table-bordered table-responsive-lg">
+            <thead class="bg-dark text-light">
+                <tr>
+                    <th>Jméno</th>
+                    <th>Příjmení</th>
+                    <th>Status</th>
+                    <th>Přdplatné</th>
+                    <th>Telefon</th>
+                    <th>Email</th>
+                    <th>Adresa</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for osoba in osoba_list %}
+                <tr>
+                    <td>{{osoba.jmeno}}</td>
+                    <td>{{osoba.prijmeni}}</td>
+                    <td>{{osoba.status}}</td>
+                    <td>{{osoba.predplatne}}</td>
+                    <td>{{osoba.telefon}}</td>
+                    <td>{{osoba.email}}</td>
+                    <td>{{osoba.adresa}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+
+        </table>
+    </div>
+{% endblock %}

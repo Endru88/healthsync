@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h2 class="text-primary text-center text-uppercase m-3">{{ lekce.nazev }}</h2>
+    <div>
+        <table class="table table-bordered table-responsive-lg">
+            <tr>
+                <th>Místnost</th>
+                <td>{{ lekce.mistnost }}</td>
+            </tr>
+            <tr>
+                <th>Začátek</th>
+                <td>{{ lekce.start }}</td>
+            </tr>
+            <tr>
+                <th>Konec</th>
+                <td>{{ lekce.konec }}</td>
+            </tr>
+            <tr>
+                <th>Cvičitel</th>
+                <td>{{ lekce.cvicitel }}</td>
+            </tr>
+        </table>
+    </div>
+    <h3 class="text-primary text-center text-uppercase lg-2">Nahlášení zákazníci</h3>
+    <div>
+        <table class="table table-bordered table-responsive-lg">
+            <thead class="bg-dark text-light">
+                <tr>
+                    <th>Status</th>
+                    <th>Jméno zákazníka</th>
+                    <th>Předplatné</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for rezervace in rezervace_list %}
+                <tr>
+                    <td>{{ rezervace.zakaznik.status }}</td>
+                    <td>{{ rezervace.zakaznik }}</td>
+                    <td>{{ rezervace.zakaznik.predplatne }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="2" class="text-center">Žádné rezervace</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
