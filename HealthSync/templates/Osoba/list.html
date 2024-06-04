@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 {% block content %}
-    <h2 class="text-primary text-center text-uppercase m-3">Seznam klientů</h2>
-    <div>
-        <table class="table table-bordered table-responsive-lg">
-            <thead class="bg-dark text-light">
+<h2 class="text-primary text-center text-uppercase m-3">Seznam klientů</h2>
+    <div class="table-responsive">
+        <table class="table table-striped table-hover">
+            <thead class="table-dark">
                 <tr>
                     <th>Jméno</th>
                     <th>Příjmení</th>
@@ -12,6 +12,7 @@
                     <th>Telefon</th>
                     <th>Email</th>
                     <th>Adresa</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -24,6 +25,7 @@
                     <td>{{osoba.telefon}}</td>
                     <td>{{osoba.email}}</td>
                     <td>{{osoba.adresa}}</td>
+                    <td><a href="{% url 'detail_osoba' osoba.id %}" class="btn btn-success">Detail</a></td>
                 </tr>
                 {% endfor %}
             </tbody>

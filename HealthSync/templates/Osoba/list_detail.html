@@ -1,34 +1,46 @@
 {% extends 'base.html' %}
 {% block content %}
-    <h2 class="text-primary text-center text-uppercase m-3">{{ lekce.nazev }}</h2>
+    <h2 class="text-primary text-center text-uppercase m-3">{{ osoba.jmeno }}{{ osoba.prijmeni }}</h2>
     <div class="table-responsive">
         <table class="table table-striped table-hover">
             <tr>
-                <th>Místnost</th>
-                <td>{{ lekce.mistnost }}</td>
+                <th>Status</th>
+                <td>{{osoba.status}}</td>
             </tr>
             <tr>
-                <th>Začátek</th>
-                <td>{{ lekce.start }}</td>
+                <th>Předplatné</th>
+                <td>{{osoba.status}}</td>
             </tr>
             <tr>
-                <th>Konec</th>
-                <td>{{ lekce.konec }}</td>
+                <th>Email</th>
+                <td>{{osoba.status}}</td>
             </tr>
             <tr>
-                <th>Cvičitel</th>
-                <td>{{ lekce.cvicitel }}</td>
+                <th>Adresa</th>
+                <td>{{osoba.status}}</td>
+            </tr>
+            <tr>
+                <th>psc</th>
+                <td>{{osoba.status}}</td>
+            </tr>
+            <tr>
+                <th>telefon</th>
+                <td>{{osoba.status}}</td>
+            </tr>
+            <tr>
+                <th>psc</th>
+                <td>{{osoba.status}}</td>
             </tr>
         </table>
     </div>
-    <h3 class="text-primary text-center text-uppercase lg-2">Nahlášení zákazníci</h3>
+    <h3 class="text-primary text-center text-uppercase lg-2">Nahlášené lekce</h3>
     <div class="table-responsive">
         <table class="table table-striped table-hover">
             <thead class="bg-dark text-light">
                 <tr>
-                    <th>Status</th>
-                    <th>Jméno zákazníka</th>
-                    <th>Předplatné</th>
+                    <th>Lekce</th>
+                    <th>Datum</th>
+                    <th>Mistnost</th>
                 </tr>
             </thead>
             <tbody>

@@ -1,7 +1,25 @@
-{% extends "base.html" %}
+
+{% extends 'base.html' %}
 {% block content %}
+    <h2 class="text-primary text-center text-uppercase m-3">Kalendář Lekcí</h2>
+    <div id="calendar"></div>
 
-
-
-
+    <script>
+        $(document).ready(function() {
+            $('#calendar').fullCalendar({
+                header: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'month,agendaWeek,agendaDay'
+                },
+                defaultView: 'agendaWeek',
+                events: '/events/',
+                eventRender: function(event, element) {
+                    element.qtip({
+                        content: event.title
+                    });
+                }
+            });
+        });
+    </script>
 {% endblock %}

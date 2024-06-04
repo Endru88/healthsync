@@ -1,21 +1,19 @@
 from django.db import models
-from django.utils import timezone
+import os
 from django.core.validators import RegexValidator
-
-# TO DO LIST
-# pridani fotky
-# checklist
-# kdo ze zaměstnanců udělal daný úkon
 
 TELEFON_REGEX = RegexValidator(r'^[+]\d{3}( \d{3}){3}$', 'Nesprávně zadané telefonní číslo')
 PSC_REGEX = RegexValidator(r'^\d{5}$', 'Nesprávně zadané poštovní směrovací číslo')
+
+
+def get_image_path(instance, filename):
+    return os.path.join('fotogalerie', '%s' % str(instance.id), filename)
 
 
 class Mistnost(models.Model):
     jmeno = models.CharField(max_length=50, verbose_name='Název místnosti',
                              error_messages={'blank': 'Jméno místnosti musí být vyplněno'})
     kapacita = models.IntegerField(default=0, verbose_name='Kapacita', help_text='Kapacita musí být vyplněna')
-
     class Meta:
         ordering = ['jmeno']
         verbose_name = 'Místnost'
@@ -39,6 +37,7 @@ class Osoba(models.Model):
     ]
     status = models.CharField(max_length=15, choices=STATUS, default='zakaznik', verbose_name='Typ účtu')
     predplatne = models.CharField(max_length=15, choices=PREDPLATNE, default='ucet', verbose_name='Typ předplatného')
+    fotka = models.ImageField(upload_to=get_image_path, verbose_name='Fotografie',blank=True)
     jmeno = models.CharField(max_length=100, verbose_name='Jméno', help_text='')
     prijmeni = models.CharField(max_length=100, verbose_name='Přijmení', help_text='Zadejte přijmení uživatele')
     telefon = models.CharField(max_length=16, verbose_name='Telefon', validators=[TELEFON_REGEX],
