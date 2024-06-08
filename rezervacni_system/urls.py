@@ -26,3 +26,6 @@ urlpatterns = [
     path('rezervace/', include('HealthSync.urls')),
     path('', RedirectView.as_view(url='rezervace/')),
 ]
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

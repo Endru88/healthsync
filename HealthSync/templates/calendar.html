@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container mt-6">
+        <h2 class="text-primary text-center text-uppercase m-4">Kalendář Lekcí</h2>
+        <div id="calendar" class="row"></div>
+    </div>
+
+    <style>
+        .day {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 0.25rem;
+            margin: 0.3rem;
+            padding: 0.5rem;
+            flex: 1;
+            width: 150%;
+        }
+
+        .day h5 {
+            margin-bottom: 1rem;
+        }
+
+        .event {
+            display: block;
+            background-color: #007bff;
+            color: white;
+            padding: 0.2rem;
+            margin-bottom: 1rem;
+            border-radius: 0.25rem;
+            text-decoration: none;
+        }
+
+        .event:hover {
+            background-color: #023142;
+        }
+    </style>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const calendarElement = document.getElementById("calendar");
+            const daysOfWeek = ["Pondělí", "Úterý", "Středa", "Čtvrtek", "Pátek", "Sobota", "Neděle"];
+            const currentDate = new Date();
+            const currentDay = currentDate.getDay();
+            const startOfWeek = new Date(currentDate.setDate(currentDate.getDate() - currentDay + (currentDay === 0 ? -6 : 1)));
+
+            for (let i = 0; i < 7; i++) {
+                const dayDate = new Date(startOfWeek);
+                dayDate.setDate(startOfWeek.getDate() + i);
+                const dayElement = document.createElement("div");
+                dayElement.className = "col-md day";
+                dayElement.innerHTML = `<h5>${daysOfWeek[i]} - ${dayDate.toLocaleDateString()}</h5>`;
+                calendarElement.appendChild(dayElement);
+
+                const dateString = dayDate.toISOString().split('T')[0];
+                console.log(`Fetching events for date: ${dateString}`);  // Debug output for date check
+
+                fetch(`/rezervace/events/?date=${dateString}`)
+                    .then(response => response.json())
+                    .then(events => {
+                        console.log(events);  // Debug output for event data check
+
+                        events.forEach(event => {
+                            const eventElement = document.createElement("a");
+                            eventElement.className = "event";
+                            eventElement.href = event.url;  // Link to detail page
+                            eventElement.innerHTML = `
+                                <strong>${event.start_time} - ${event.end_time}</strong><br>
+                                ${event.title}<br>
+                                Místnost: ${event.room}<br>
+                                Cvičitel: ${event.trainer} ${event.trainer_sur}<br>
+                                Počet osob: ${event.count}<br>
+                                `;
+                            dayElement.appendChild(eventElement);
+                        });
+                    });
+            }
+        });
+    </script>
+{% endblock %}

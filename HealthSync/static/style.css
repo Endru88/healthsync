@@ -38,3 +38,9 @@ footer {
 .footer p {
     margin: 0;
 }
+body {
+  background-image: url('https://w0.peakpx.com/wallpaper/188/649/HD-wallpaper-key-features-of-an-online-reservation-system.jpg');
+  background-size: cover; /* zajistí, aby obrázek zaplnil celou plochu */
+  background-position: center; /* umístí obrázek do středu */
+  background-repeat: no-repeat; /* zabrání opakování obrázku */
+}

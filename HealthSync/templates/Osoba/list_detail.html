@@ -1,61 +1,50 @@
 {% extends 'base.html' %}
 {% block content %}
-    <h2 class="text-primary text-center text-uppercase m-3">{{ osoba.jmeno }}{{ osoba.prijmeni }}</h2>
-    <div class="table-responsive">
-        <table class="table table-striped table-hover">
-            <tr>
-                <th>Status</th>
-                <td>{{osoba.status}}</td>
-            </tr>
-            <tr>
-                <th>Předplatné</th>
-                <td>{{osoba.status}}</td>
-            </tr>
-            <tr>
-                <th>Email</th>
-                <td>{{osoba.status}}</td>
-            </tr>
-            <tr>
-                <th>Adresa</th>
-                <td>{{osoba.status}}</td>
-            </tr>
-            <tr>
-                <th>psc</th>
-                <td>{{osoba.status}}</td>
-            </tr>
-            <tr>
-                <th>telefon</th>
-                <td>{{osoba.status}}</td>
-            </tr>
-            <tr>
-                <th>psc</th>
-                <td>{{osoba.status}}</td>
-            </tr>
-        </table>
-    </div>
-    <h3 class="text-primary text-center text-uppercase lg-2">Nahlášené lekce</h3>
-    <div class="table-responsive">
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-6">
+                <h2 class="text-primary text-center text-uppercase m-3">{{ osoba.jmeno }} {{ osoba.prijmeni }}</h2>
+                <p><strong>Status:</strong> {{ osoba.status }}</p>
+                <p><strong>Typ předplatného:</strong> {{ osoba.predplatne }}</p>
+                <p><strong>Telefon:</strong> {{ osoba.telefon }}</p>
+                <p><strong>Email:</strong> {{ osoba.email }}</p>
+                <p><strong>Adresa:</strong> {{ osoba.adresa }}</p>
+                <p><strong>PSČ:</strong> {{ osoba.psc }}</p>
+                <p><strong>Informace:</strong> {{ osoba.info }}</p>
+
+        </div>
+            <div class="col-md-6">
+                {% if osoba.fotka %}
+                    <img src="{{ osoba.fotka.url }}" alt="Fotografie osoby" class="img-fluid">
+                {% else %}
+                    <p>Fotografie není k dispozici.</p>
+                {% endif %}
+            </div>
+                <h3 class="mt-4">Lekce:</h3>
+                <div class="table-responsive">
         <table class="table table-striped table-hover">
             <thead class="bg-dark text-light">
-                <tr>
-                    <th>Lekce</th>
-                    <th>Datum</th>
-                    <th>Mistnost</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for rezervace in rezervace_list %}
-                <tr>
-                    <td>{{ rezervace.zakaznik.status }}</td>
-                    <td>{{ rezervace.zakaznik }}</td>
-                    <td>{{ rezervace.zakaznik.predplatne }}</td>
-                </tr>
-                {% empty %}
-                <tr>
-                    <td colspan="3" class="text-center">Žádné rezervace</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+    <tr>
+      <th>Název lekce</th>
+      <th>Místnost</th>
+      <th>Datum</th>
+      <th>Čas</th>
+      <th>Cvičitel</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for rezervace in rezervace %}
+    <tr>
+      <td>{{ rezervace.lekce.nazev }}</td>
+      <td>{{ rezervace.lekce.mistnost.jmeno }}</td>
+      <td>{{ rezervace.lekce.start|date:"j. E Y" }}</td>
+      <td>{{ rezervace.lekce.start|time:"H:i" }} - {{ rezervace.lekce.konec|time:"H:i" }}</td>
+      <td>{{ rezervace.lekce.cvicitel.jmeno }} {{ rezervace.lekce.cvicitel.prijmeni }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+            </div>
+
     </div>
 {% endblock %}

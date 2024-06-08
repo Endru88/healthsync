@@ -7,7 +7,7 @@ PSC_REGEX = RegexValidator(r'^\d{5}$', 'Nesprávně zadané poštovní směrovac
 
 
 def get_image_path(instance, filename):
-    return os.path.join('fotogalerie', '%s' % str(instance.id), filename)
+    return os.path.join('fotografie', '%s' % str(instance.id), filename)
 
 
 class Mistnost(models.Model):
