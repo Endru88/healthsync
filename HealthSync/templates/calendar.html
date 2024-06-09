@@ -16,6 +16,10 @@
             width: 150%;
         }
 
+        .current-day {
+            background-color: #d3d3d3; /* Light gray color for the current day */
+        }
+
         .day h5 {
             margin-bottom: 1rem;
         }
@@ -40,14 +44,17 @@
             const calendarElement = document.getElementById("calendar");
             const daysOfWeek = ["Pondělí", "Úterý", "Středa", "Čtvrtek", "Pátek", "Sobota", "Neděle"];
             const currentDate = new Date();
-            const currentDay = currentDate.getDay();
-            const startOfWeek = new Date(currentDate.setDate(currentDate.getDate() - currentDay + (currentDay === 0 ? -6 : 1)));
+            const currentDay = (currentDate.getDay() + 6) % 7;  // Adjusting current day to start from Monday (0=Monday, 6=Sunday)
+            const startOfWeek = new Date(currentDate.setDate(currentDate.getDate() - currentDay));
 
             for (let i = 0; i < 7; i++) {
                 const dayDate = new Date(startOfWeek);
                 dayDate.setDate(startOfWeek.getDate() + i);
                 const dayElement = document.createElement("div");
                 dayElement.className = "col-md day";
+                if (dayDate.toDateString() === new Date().toDateString()) {
+                    dayElement.classList.add("current-day");  // Highlight the current day
+                }
                 dayElement.innerHTML = `<h5>${daysOfWeek[i]} - ${dayDate.toLocaleDateString()}</h5>`;
                 calendarElement.appendChild(dayElement);
 

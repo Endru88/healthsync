@@ -9,9 +9,6 @@
                     <th>Příjmení</th>
                     <th>Status</th>
                     <th>Přdplatné</th>
-                    <th>Telefon</th>
-                    <th>Email</th>
-                    <th>Adresa</th>
                     <th></th>
                 </tr>
             </thead>
@@ -22,9 +19,6 @@
                     <td>{{osoba.prijmeni}}</td>
                     <td>{{osoba.status}}</td>
                     <td>{{osoba.predplatne}}</td>
-                    <td>{{osoba.telefon}}</td>
-                    <td>{{osoba.email}}</td>
-                    <td>{{osoba.adresa}}</td>
                     <td><a href="{% url 'detail_osoba' osoba.id %}" class="btn btn-success">Detail</a></td>
                 </tr>
                 {% endfor %}
