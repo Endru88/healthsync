@@ -17,7 +17,7 @@
         }
 
         .current-day {
-            background-color: #d3d3d3; /* Light gray color for the current day */
+            background-color: #d3d3d3;
         }
 
         .day h5 {
@@ -44,7 +44,7 @@
             const calendarElement = document.getElementById("calendar");
             const daysOfWeek = ["Pondělí", "Úterý", "Středa", "Čtvrtek", "Pátek", "Sobota", "Neděle"];
             const currentDate = new Date();
-            const currentDay = (currentDate.getDay() + 6) % 7;  // Adjusting current day to start from Monday (0=Monday, 6=Sunday)
+            const currentDay = (currentDate.getDay() + 6) % 7;
             const startOfWeek = new Date(currentDate.setDate(currentDate.getDate() - currentDay));
 
             for (let i = 0; i < 7; i++) {
@@ -53,25 +53,44 @@
                 const dayElement = document.createElement("div");
                 dayElement.className = "col-md day";
                 if (dayDate.toDateString() === new Date().toDateString()) {
-                    dayElement.classList.add("current-day");  // Highlight the current day
+                    dayElement.classList.add("current-day");
                 }
                 dayElement.innerHTML = `<h5>${daysOfWeek[i]} - ${dayDate.toLocaleDateString()}</h5>`;
                 calendarElement.appendChild(dayElement);
 
                 const dateString = dayDate.toISOString().split('T')[0];
-                console.log(`Fetching events for date: ${dateString}`);  // Debug output for date check
+                console.log(`Fetching events for date: ${dateString}`);
 
                 fetch(`/rezervace/events/?date=${dateString}`)
                     .then(response => response.json())
                     .then(events => {
-                        console.log(events);  // Debug output for event data check
+                        console.log(events);
+
+
+                        events.sort((a, b) => a.start_time.localeCompare(b.start_time));
 
                         events.forEach(event => {
                             const eventElement = document.createElement("a");
                             eventElement.className = "event";
-                            eventElement.href = event.url;  // Link to detail page
+                            eventElement.href = event.url;
+
+                            function addHours(timeString, hoursToAdd) {
+                                const [hours, minutes] = timeString.split(':').map(Number);
+                                const date = new Date();
+                                date.setHours(hours + hoursToAdd, minutes);
+                                const newHours = String(date.getHours()).padStart(2, '0');
+                                const newMinutes = String(date.getMinutes()).padStart(2, '0');
+                                return `${newHours}:${newMinutes}`;
+                            }
+
+                            const startTime = event.start_time;
+                            const endTime = event.end_time;
+
+                            const adjustedStartTime = addHours(startTime, 2);
+                            const adjustedEndTime = addHours(endTime, 2);
+
                             eventElement.innerHTML = `
-                                <strong>${event.start_time} - ${event.end_time}</strong><br>
+                                <strong>${adjustedStartTime} - ${adjustedEndTime}</strong><br>
                                 ${event.title}<br>
                                 Místnost: ${event.room}<br>
                                 Cvičitel: ${event.trainer} ${event.trainer_sur}<br>
