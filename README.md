@@ -1,17 +1,18 @@
-#Závěrečný projekt
-##Rezervační systém HealthSync
+Závěrečný projekt
+
+Rezervační systém HealthSync
 
 
 
 
-###ZDROJE:
+ZDROJE:
 -
 -
 -
 -
 
 
-###HARMONOGRAM:
+HARMONOGRAM:
 -
 -
 -
