@@ -1,20 +1,46 @@
-ZÁVĚREČNÝ PROJEKT
 
-REZERVAČNÍ SYSTÉM HEALTHSYNC
+# ZÁVĚREČNÝ PROJEKT
+## REZERVAČNÍ SYSTÉM HEALTHSYNC
 
-
-
-
-ZDROJE:
+## ZDROJE:
 -
 -
 -
 -
 
+## HARMONOGRAM:
 
-HARMONOGRAM:
--
--
--
--
--
+### ČERVEN:
+  - 
+  -
+  -
+  -
+  -
+
+### ZÁŘÍ:
+  - 
+  -
+  -
+  -
+  -
+
+### ŘÍJEN:
+  - 
+  -
+  -
+  -
+  -
+
+### LISTOPAD:
+  - 
+  -
+  -
+  -
+  -
+
+### PROSINEC:
+  - 
+  -
+  -
+  -
+  -
