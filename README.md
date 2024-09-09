@@ -1,6 +1,6 @@
-Závěrečný projekt
+ZÁVĚREČNÝ PROJEKT
 
-Rezervační systém HealthSync
+REZERVAČNÍ SYSTÉM HEALTHSYNC
 
 
 
